@@ -1,0 +1,9 @@
+{
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }],
+  "plugins": ["prettier-plugin-svelte"],
+  "singleQuote": false,
+  "trailingComma": "none",
+  "useTabs": false
+}
