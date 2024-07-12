@@ -5,9 +5,11 @@ const SID_STORAGE_KEY = "sandbox:sid";
 export type LoginRequest = {
   email: string;
   password: string;
+  rememberMe: boolean;
 };
 
-export function login(cookies: Cookies, _request: LoginRequest) {
+export function login(cookies: Cookies, request: LoginRequest) {
+  console.log({ request });
   const base32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
   const values = new Array(40);
 
@@ -16,8 +18,11 @@ export function login(cookies: Cookies, _request: LoginRequest) {
   }
 
   const sid = values.join("");
+  const maxAge = request.rememberMe ? 60 * 60 * 24 * 365 : undefined;
 
-  cookies.set(SID_STORAGE_KEY, sid, { path: "/" });
+  console.log("login", { sid, maxAge });
+
+  cookies.set(SID_STORAGE_KEY, sid, { path: "/", maxAge });
 }
 
 export function logout(cookies: Cookies) {
